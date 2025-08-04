@@ -1,0 +1,8 @@
+{% extends 'blog/base.html' %}
+{% block main-area %}
+    <form method="comment" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ commentform }}
+        <input type="submit">
+    </form>
+{% endblock %}

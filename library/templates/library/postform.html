@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>title</title>
+</head>
+<body>
+    글쓰는 화면.
+    http://127.0.0.1:8000/library/create
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ postform }}
+        <input type="submit">
+    </form>
+</body>
+</html>

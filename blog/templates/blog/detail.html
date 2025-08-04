@@ -1,0 +1,78 @@
+{% extends 'blog/base.html' %}
+{% block main-area %}
+<div class="container mt-5">
+            <div class="row">
+                <div class="col-lg-8">
+                    <!-- Post content-->
+                    <article>
+                        <!-- Post header-->
+                        <header class="mb-4">
+                            <!-- Post title-->
+                            <h1 class="fw-bolder mb-1"> {{ post2.title }}</h1>
+                            <!-- Post meta content-->
+                            <div class="text-muted fst-italic mb-2">Posted on {{ post2.created_date}} by {{post2.author.last_name}}</div>
+                            <!-- Post categories-->
+                            {% if post2.category %}
+                                <a class="badge bg-secondary text-decoration-none link-light" href="#!">{{post2.category.name}}</a>
+                            {% else %}
+                                <a class="badge bg-secondary text-decoration-none link-light" href="#!">None</a>
+                            {% endif %}
+                            <a class = 'btn btn-primary' href="/blog/{{post2.pk}}/delete/">삭제</a>
+                            <a class = 'btn btn-success' href="/blog/{{post2.pk}}/update/">업데이트</a>
+                        </header>
+                        
+                        <!-- Preview image figure-->
+                        <figure class="mb-4">
+                            {% if post2.uploaded_image %}
+                                <img class="img-fluid rounded"
+                                 src={{ post2.uploaded_image.url }} alt="..." />
+
+                            {% else %}
+                                <img class="img-fluid rounded"
+                                 src="https://dummyimage.com/850x350/dee2e6/6c757d.jpg" alt="..." />
+                            {% endif %}
+                        </figure>
+                        {% if post2.uploaded_file %}
+                        <button>
+                            <a href={{ post2.uploaded_file.url }} download>다운로드</a>
+                        </button>
+                        {% endif %}
+                        <!-- Post content-->
+                        <section class="mb-5">
+                             <p class="fs-5 mb-4"> {{ post2.content}}</p>
+                        </section>
+                    </article>
+                    <section class="mb-5">
+                        <div class="card bg-light">
+                            <div class="card-body">
+                                
+                                {% for comment in comments %}
+                                <div class="ms-3"> 
+                                    
+                                    <div class="border-bottom mb-2 pb-2">
+                                        <p><strong>{{ comment.author.username }}</strong> • {{ comment.created_date|date:"Y-m-d H:i" }}</p>
+                                        <p>{{ comment.content }}</p>
+                                        <a href="{% url 'updatecomment' comment.pk %}" class="btn btn-sm btn-outline-secondary">수정</a>
+                                        <a href="{% url 'deletecomment' comment.pk %}" class="btn btn-sm btn-outline-secondary">삭제</a>
+                                    </div>
+                                </div>
+                                    {% empty %}
+                                        <p>아직 댓글이 없습니다.</p>
+                                    {% endfor %}
+
+                                    <hr>
+
+                                    <h3>댓글 작성</h3>
+                                    <form method="POST" enctype="multipart/form-data" action="{% url 'createcomment' post2.pk %}">
+                                    {% include "blog/commentupdateform.html" %}
+                                    </form>
+                                        
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+            </div>
+        </div>
+{% endblock %}
+       
