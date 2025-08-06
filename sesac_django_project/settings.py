@@ -40,7 +40,9 @@ INSTALLED_APPS = [
     'blog',
     'single_pages',
     'library',
-    'django_extensions'
+    'django_extensions',
+    'example',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [

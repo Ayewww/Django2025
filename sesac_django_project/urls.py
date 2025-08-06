@@ -31,7 +31,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('blog/', include('blog.urls')),
     path('', include('single_pages.urls')),
-    path('library/', include('library.urls'))
+    path('library/', include('library.urls')),
+    path('example/', include('example.urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL,

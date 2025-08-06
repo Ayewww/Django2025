@@ -20,9 +20,9 @@ class Post(models.Model):
     updated_date = models.DateTimeField(auto_now=True,
                                         null=True)
     uploaded_image = models.ImageField(upload_to='images/',
-                                       blank=True,)
+                                       blank=True,null=True)
     uploaded_file = models.FileField(upload_to='files/',
-                                       blank=True,)
+                                       blank=True,null=True)
     
 
     def __str__(self):
